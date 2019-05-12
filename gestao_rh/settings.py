@@ -40,6 +40,7 @@ INSTALLED_APPS = [
 # Applications of 3rd
     'apps.empresas',
     'apps.funcionarios',
+    'apps.departamentos',
 ]
 
 MIDDLEWARE = [
