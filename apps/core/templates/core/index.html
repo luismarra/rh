@@ -206,7 +206,7 @@ AdminLTE 2 | Starter
                     <a href="#">
                       <div class="pull-left">
                         <!-- User Image -->
-                        <img src="{% static 'AdminLTE/dist/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+                        <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="img-circle" alt="User Image">
                       </div>
                       <!-- Message title and timestamp -->
                       <h4>
@@ -297,41 +297,49 @@ AdminLTE 2 | Starter
    <!-- Menu Toggle Button -->
    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
       <!-- The user image in the navbar-->
-      <img src="{% static 'AdminLTE/dist/img/user2-160x160.jpg' %}" class="user-image" alt="User Image">
+      <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="user-image" alt="User Image">
       <!-- hidden-xs hides the username on small devices so only the image appears. -->
-      <span class="hidden-xs">Alexander Pierce</span>
+      <span class="hidden-xs">{{ usuario.funcionario.nome }}</span>
    </a>
    <ul class="dropdown-menu">
       <!-- The user image in the menu -->
       <li class="user-header">
-         <img src="{% static 'AdminLTE/dist/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+         <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="img-circle" alt="User Image">
          <p>
-            Alexander Pierce - Web Developer
-            <small>Member since Nov. 2012</small>
-         </p>
+             <a style="color: #fdfdfd">{{ usuario.funcionario.nome }}</a>
+             {% if usuario.funcionario.empresa %}
+             <a href="" style="color: #fdfdfd"> - {{ usuario.funcionario.empresa }}</a>
+             {% else %}
+             <a href=""style="color: #fdfdfd"> - Criar Empresa</a>
+             {% endif %}
+             <small>{{ usuario.funcionario.funcao }}</small>
+
       </li>
       <!-- Menu Body -->
       <li class="user-body">
          <div class="row">
+             <br>
             <div class="col-xs-4 text-center">
-               <a href="#">Followers</a>
+               <a href="#" class="btn-xs">Followers</a>
             </div>
             <div class="col-xs-4 text-center">
-               <a href="#">Sales</a>
+               <a href="#" class="btn-xs">Sales</a>
             </div>
             <div class="col-xs-4 text-center">
-               <a href="#">Friends</a>
+               <a href="#" class="btn-xs">Friends</a>
             </div>
+             <br>
+             <br>
          </div>
          <!-- /.row -->
       </li>
       <!-- Menu Footer-->
       <li class="user-footer">
          <div class="pull-left">
-            <a href="#" class="btn btn-default btn-flat">Profile</a>
+            <a href="#" class="btn btn-default btn-sm">Profile</a>
          </div>
          <div class="pull-right">
-            <a href="#" class="btn btn-default btn-flat">Sign out</a>
+            <a href="/accounts/logout/" class="btn btn-danger btn-sm">Logout</a>
          </div>
       </li>
    </ul>
@@ -341,10 +349,10 @@ AdminLTE 2 | Starter
 {% block userpanel_sidebar %}
 <div class="user-panel">
    <div class="pull-left image">
-      <img src="{% static 'AdminLTE/dist/img/user2-160x160.jpg' %}" class="img-circle" alt="User Image">
+      <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="img-circle" alt="User Image">
    </div>
    <div class="pull-left info">
-      <p>Alexander Pierce</p>
+      <p>{{ usuario.funcionario.nome }}</p>
       <!-- Status -->
       <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
    </div>

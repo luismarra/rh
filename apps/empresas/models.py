@@ -6,4 +6,4 @@ class Empresa(models.Model):
     segmento = models.CharField(max_length=200, help_text='Segmento da empresa')
 
     def __str__(self):
-        return self.nome + ': ' + self.segmento
+        return self.nome
