@@ -1,0 +1,107 @@
+{% extends 'starter.html' %}
+{% load static %}
+<!--
+   Use as tags para invalidar parte dos códigos ou o block
+   -->
+{% block title %}
+ExpNEP | Cadastro Empresa
+{% endblock %}
+{% block header %}
+<section class="content-header">
+   <h1>
+      Empresa
+      <small>
+
+      </small>
+   </h1>
+   <ol class="breadcrumb">
+      <li><a href="#"><i class="fa fa-dashboard"></i>Nova Empresa</a></li>
+      <li class="active"><a href="/">Home</a></li>
+   </ol>
+</section>
+{% endblock %}
+{% block main %}
+<section class="content">
+   <div class="col-lg-3 col-xs-6">
+      <!-- small box -->
+
+      <div class="small-box bg-aqua">
+         <div class="inner">
+            <h3>150</h3>
+            <p>Novas Empresas</p>
+         </div>
+         <div class="icon">
+            <i class="fa fa-building"></i>
+         </div>
+         <a href="#" class="small-box-footer" data-toggle="modal" data-target="#modal-create_empresa">Cadastrar nova empresa <i class="fa fa-arrow-circle-right"></i></a>
+      </div>
+
+   </div>
+</section>
+<div class="modal fade" id="modal-create_empresa">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Cadastro Empresa</h4>
+         </div>
+         <div class="modal-body">
+            <form method="post" role="form">
+               {% csrf_token %}
+               <div class="form-group">
+                  <label class="required" for="{{ form.id_nome }}">Nome Empresa</label>
+               <div class="input-group">
+                  <div class="input-group-addon">
+                    <i class="fa fa-building-o"></i>
+                  </div>
+                  <input type="text" name="nome" autofocus="" required="" class="form-control" id="{{ form.id_nome }}" placeholder="Enter ...">
+                </div>
+
+               </div>
+               <div class="form-group">
+                  <label>Segmento</label>
+                  <textarea name="segmento" required="" class="form-control" rows="4" id="{{ form.id_segmento }}" placeholder="Enter ..."></textarea>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-default pull-left" data-dismiss="modal">Close</button>
+                  <button type="submit" class="btn btn-primary">Save changes</button>
+               </div>
+            </form>
+         </div>
+      </div>
+      <!-- /.modal-content -->
+   </div>
+   <!-- /.modal-dialog -->
+</div>
+{% endblock %}
+{% block search_sidebar %}
+{% include 'block_search_sidebar.html' %}
+{% endblock %}
+{% block logo_sidebar %}
+{% include 'block_logo_sidebar.html' %}
+{% endblock %}
+{% block topside_menu_messages %}
+{% include 'block_topside_menu_messages.html' %}
+{% endblock %}
+{% block topside_menu_tasks %}
+{% include 'block_topside_menu_tasks.html' %}
+{% endblock %}
+{% block topside_menu_notifications %}
+{% include 'block_topside_menu_notifications.html' %}
+{% endblock %}
+{% block topside_useraccount_menu %}
+{% include 'block_topside_useraccount_menu.html' %}
+{% endblock %}
+{% block userpanel_sidebar %}
+{% include 'block_userpanel_sidebar.html' %}
+{% endblock %}
+{% block body_footer %}
+{% include 'block_body_footer.html' %}
+{% endblock %}
+{% block right_sidebar_custon %}
+{% include 'block_right_sidebar_custon.html' %}
+{% endblock %}
+{% block menu_sidebar %}
+{% include 'block_menu_sidebar.html' %}
+{% endblock %}

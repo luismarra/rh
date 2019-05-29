@@ -1,0 +1,38 @@
+{% load static %}
+
+<ul class="sidebar-menu" data-widget="tree">
+   <li class="header">Gente</li>
+   <!-- Optionally, you can add icons to the links -->
+
+   <!--
+   <li><a href="#"><i class="fa fa-users"></i> <span>QLP</span></a></li>
+   -->
+
+   <li class="treeview active">
+      <a href="#"><i class="fa fa-users"></i> <span>Cadastro</span>
+      <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+      </span>
+      </a>
+      <ul class="treeview-menu">
+         <li><a href="#"><i class="fa fa-user-plus"></i>Funcionário</a></li>
+         <li class="active"><a href="{% url 'create_empresa' %}"><i class="fa fa-tasks"></i>Empresa</a></li>
+         <li><a href="#"><i class="fa fa-file-text-o"></i>Link in level 3</a></li>
+      </ul>
+   </li>
+
+   <li><a href="#"><i class="fa fa-truck"></i> <span>Another Link</span></a></li>
+
+   <li class="treeview">
+      <a href="#"><i class="fa  fa-list-alt"></i> <span>Multilevel</span>
+      <span class="pull-right-container">
+      <i class="fa fa-angle-left pull-right"></i>
+      </span>
+      </a>
+      <ul class="treeview-menu">
+         <li><a href="#">Link in level 2</a></li>
+         <li><a href="#">Link in level 2</a></li>
+      </ul>
+   </li>
+
+</ul>

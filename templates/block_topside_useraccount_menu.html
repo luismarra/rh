@@ -1,0 +1,53 @@
+{% load static %}
+
+<li class="dropdown user user-menu">
+   <!-- Menu Toggle Button -->
+   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+      <!-- The user image in the navbar-->
+      <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="user-image" alt="User Image">
+      <!-- hidden-xs hides the username on small devices so only the image appears. -->
+      <span class="hidden-xs">{{ request.user.funcionario.user }}</span>
+   </a>
+   <ul class="dropdown-menu">
+      <!-- The user image in the menu -->
+      <li class="user-header">
+         <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="img-circle" alt="User Image">
+         <p>
+             <a style="color: #fdfdfd">{{ request.user.funcionario.nome }}</a>
+             {% if request.user.funcionario.empresa %}
+             <a href="" style="color: #fdfdfd"> - {{ request.user.funcionario.empresa }}</a>
+             {% else %}
+             <a href=""style="color: #fdfdfd"> - Criar Empresa</a>
+             {% endif %}
+             <small>{{ request.user.funcionario.funcao }}</small>
+
+      </li>
+      <!-- Menu Body -->
+      <li class="user-body">
+         <div class="row">
+             <br>
+            <div class="col-xs-4 text-center">
+               <a href="#" class="btn-xs">Followers</a>
+            </div>
+            <div class="col-xs-4 text-center">
+               <a href="#" class="btn-xs">Sales</a>
+            </div>
+            <div class="col-xs-4 text-center">
+               <a href="#" class="btn-xs">Friends</a>
+            </div>
+             <br>
+             <br>
+         </div>
+         <!-- /.row -->
+      </li>
+      <!-- Menu Footer-->
+      <li class="user-footer">
+         <div class="pull-left">
+            <a href="#" class="btn btn-default btn-sm">Profile</a>
+         </div>
+         <div class="pull-right">
+            <a href="/accounts/logout/" class="btn btn-danger btn-sm">Logout</a>
+         </div>
+      </li>
+   </ul>
+</li>

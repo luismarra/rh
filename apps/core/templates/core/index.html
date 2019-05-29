@@ -2,9 +2,7 @@
 {% load static %}
 
 <!--
-
    Use as tags para invalidar parte dos códigos ou o block
-
 -->
 
 {% block title %}
@@ -170,316 +168,42 @@ AdminLTE 2 | Starter
 {% endblock %}
 
 {% block search_sidebar %}
-<form action="#" method="get" class="sidebar-form">
-   <div class="input-group">
-      <input type="text" name="q" class="form-control" placeholder="Search...">
-      <span class="input-group-btn">
-      <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
-      </button>
-      </span>
-   </div>
-</form>
+    {% include 'block_search_sidebar.html' %}
 {% endblock %}
 
 {% block logo_sidebar %}
-<a href="index2.html" class="logo">
-    <!-- mini logo for sidebar mini 50x50 pixels -->
-    <span class="logo-mini"><b>E</b>N</span>
-    <!-- logo for regular state and mobile devices -->
-    <span class="logo-lg"><b>Exp</b>NEP</span>
-</a>
+    {% include 'block_logo_sidebar.html' %}
 {% endblock %}
 
 {% block topside_menu_messages %}
-<li class="dropdown messages-menu">
-            <!-- Menu toggle button -->
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              <i class="fa fa-envelope-o"></i>
-              <span class="label label-success">4</span>
-            </a>
-            <ul class="dropdown-menu">
-              <li class="header">You have 4 messages</li>
-              <li>
-                <!-- inner menu: contains the messages -->
-                <ul class="menu">
-                  <li><!-- start message -->
-                    <a href="#">
-                      <div class="pull-left">
-                        <!-- User Image -->
-                        <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="img-circle" alt="User Image">
-                      </div>
-                      <!-- Message title and timestamp -->
-                      <h4>
-                        Support Team
-                        <small><i class="fa fa-clock-o"></i> 5 mins</small>
-                      </h4>
-                      <!-- The message -->
-                      <p>Why not buy a new awesome theme?</p>
-                    </a>
-                  </li>
-                  <!-- end message -->
-                </ul>
-                <!-- /.menu -->
-              </li>
-              <li class="footer"><a href="#">See All Messages</a></li>
-            </ul>
-          </li>
+    {% include 'block_topside_menu_messages.html' %}
 {% endblock %}
 
 {% block topside_menu_tasks %}
-<li class="dropdown tasks-menu">
-   <!-- Menu Toggle Button -->
-   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-   <i class="fa fa-flag-o"></i>
-   <span class="label label-danger">9</span>
-   </a>
-   <ul class="dropdown-menu">
-      <li class="header">You have 9 tasks</li>
-      <li>
-         <!-- Inner menu: contains the tasks -->
-         <ul class="menu">
-            <li>
-               <!-- Task item -->
-               <a href="#">
-                  <!-- Task title and progress text -->
-                  <h3>
-                     Design some buttons
-                     <small class="pull-right">20%</small>
-                  </h3>
-                  <!-- The progress bar -->
-                  <div class="progress xs">
-                     <!-- Change the css width attribute to simulate progress -->
-                     <div class="progress-bar progress-bar-aqua" style="width: 20%" role="progressbar"
-                        aria-valuenow="20" aria-valuemin="0" aria-valuemax="100">
-                        <span class="sr-only">20% Complete</span>
-                     </div>
-                  </div>
-               </a>
-            </li>
-            <!-- end task item -->
-         </ul>
-      </li>
-      <li class="footer">
-         <a href="#">View all tasks</a>
-      </li>
-   </ul>
-</li>
+    {% include 'block_topside_menu_tasks.html' %}
 {% endblock %}
 
 {% block topside_menu_notifications %}
-<li class="dropdown notifications-menu">
-   <!-- Menu toggle button -->
-   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-   <i class="fa fa-bell-o"></i>
-   <span class="label label-warning">10</span>
-   </a>
-   <ul class="dropdown-menu">
-      <li class="header">You have 10 notifications</li>
-      <li>
-         <!-- Inner Menu: contains the notifications -->
-         <ul class="menu">
-            <li>
-               <!-- start notification -->
-               <a href="#">
-               <i class="fa fa-users text-aqua"></i> 5 new members joined today
-               </a>
-            </li>
-            <!-- end notification -->
-         </ul>
-      </li>
-      <li class="footer"><a href="#">View all</a></li>
-   </ul>
-</li>
+    {% include 'block_topside_menu_notifications.html' %}
 {% endblock %}
 
 {% block topside_useraccount_menu %}
-<li class="dropdown user user-menu">
-   <!-- Menu Toggle Button -->
-   <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-      <!-- The user image in the navbar-->
-      <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="user-image" alt="User Image">
-      <!-- hidden-xs hides the username on small devices so only the image appears. -->
-      <span class="hidden-xs">{{ usuario.funcionario.nome }}</span>
-   </a>
-   <ul class="dropdown-menu">
-      <!-- The user image in the menu -->
-      <li class="user-header">
-         <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="img-circle" alt="User Image">
-         <p>
-             <a style="color: #fdfdfd">{{ usuario.funcionario.nome }}</a>
-             {% if usuario.funcionario.empresa %}
-             <a href="" style="color: #fdfdfd"> - {{ usuario.funcionario.empresa }}</a>
-             {% else %}
-             <a href=""style="color: #fdfdfd"> - Criar Empresa</a>
-             {% endif %}
-             <small>{{ usuario.funcionario.funcao }}</small>
-
-      </li>
-      <!-- Menu Body -->
-      <li class="user-body">
-         <div class="row">
-             <br>
-            <div class="col-xs-4 text-center">
-               <a href="#" class="btn-xs">Followers</a>
-            </div>
-            <div class="col-xs-4 text-center">
-               <a href="#" class="btn-xs">Sales</a>
-            </div>
-            <div class="col-xs-4 text-center">
-               <a href="#" class="btn-xs">Friends</a>
-            </div>
-             <br>
-             <br>
-         </div>
-         <!-- /.row -->
-      </li>
-      <!-- Menu Footer-->
-      <li class="user-footer">
-         <div class="pull-left">
-            <a href="#" class="btn btn-default btn-sm">Profile</a>
-         </div>
-         <div class="pull-right">
-            <a href="/accounts/logout/" class="btn btn-danger btn-sm">Logout</a>
-         </div>
-      </li>
-   </ul>
-</li>
+    {% include 'block_topside_useraccount_menu.html' %}
 {% endblock %}
 
 {% block userpanel_sidebar %}
-<div class="user-panel">
-   <div class="pull-left image">
-      <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="img-circle" alt="User Image">
-   </div>
-   <div class="pull-left info">
-      <p>{{ usuario.funcionario.nome }}</p>
-      <!-- Status -->
-      <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
-   </div>
-</div>
+    {% include 'block_userpanel_sidebar.html' %}
 {% endblock %}
 
 {% block body_footer %}
-  <footer class="main-footer">
-    <!-- To the right -->
-    <div class="pull-right hidden-xs">
-      Anything you want
-    </div>
-    <!-- Default to the left -->
-    <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
-  </footer>
+    {% include 'block_body_footer.html' %}
 {% endblock %}
 
 {% block right_sidebar_custon %}
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Create the tabs -->
-    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
-      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
-      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
-    </ul>
-    <!-- Tab panes -->
-    <div class="tab-content">
-      <!-- Home tab content -->
-      <div class="tab-pane active" id="control-sidebar-home-tab">
-        <h3 class="control-sidebar-heading">Recent Activity</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <i class="menu-icon fa fa-birthday-cake bg-red"></i>
-
-              <div class="menu-info">
-                <h4 class="control-sidebar-subheading">Langdon's Birthday</h4>
-
-                <p>Will be 23 on April 24th</p>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-        <h3 class="control-sidebar-heading">Tasks Progress</h3>
-        <ul class="control-sidebar-menu">
-          <li>
-            <a href="javascript:;">
-              <h4 class="control-sidebar-subheading">
-                Custom Template Design
-                <span class="pull-right-container">
-                    <span class="label label-danger pull-right">70%</span>
-                  </span>
-              </h4>
-
-              <div class="progress progress-xxs">
-                <div class="progress-bar progress-bar-danger" style="width: 70%"></div>
-              </div>
-            </a>
-          </li>
-        </ul>
-        <!-- /.control-sidebar-menu -->
-
-      </div>
-      <!-- /.tab-pane -->
-      <!-- Stats tab content -->
-      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
-      <!-- /.tab-pane -->
-      <!-- Settings tab content -->
-      <div class="tab-pane" id="control-sidebar-settings-tab">
-        <form method="post">
-          <h3 class="control-sidebar-heading">General Settings</h3>
-
-          <div class="form-group">
-            <label class="control-sidebar-subheading">
-              Report panel usage
-              <input type="checkbox" class="pull-right" checked>
-            </label>
-
-            <p>
-              Some information about this general settings option
-            </p>
-          </div>
-          <!-- /.form-group -->
-        </form>
-      </div>
-      <!-- /.tab-pane -->
-    </div>
-  </aside>
+    {% include 'block_right_sidebar_custon.html' %}
   {% endblock %}
 
 {% block menu_sidebar %}
-<ul class="sidebar-menu" data-widget="tree">
-   <li class="header">Gente</li>
-   <!-- Optionally, you can add icons to the links -->
-
-   <!--
-   <li><a href="#"><i class="fa fa-users"></i> <span>QLP</span></a></li>
-   -->
-
-   <li class="treeview active">
-      <a href="#"><i class="fa fa-users"></i> <span>QLP</span>
-      <span class="pull-right-container">
-      <i class="fa fa-angle-left pull-right"></i>
-      </span>
-      </a>
-      <ul class="treeview-menu">
-         <li><a href="#"><i class="fa fa-user-plus"></i>Registro Funcionário</a></li>
-         <li class="active"><a href="#"><i class="fa fa-tasks"></i>Link in level 2</a></li>
-         <li><a href="#"><i class="fa fa-file-text-o"></i>Link in level 3</a></li>
-      </ul>
-   </li>
-
-   <li><a href="#"><i class="fa fa-truck"></i> <span>Another Link</span></a></li>
-
-   <li class="treeview">
-      <a href="#"><i class="fa  fa-list-alt"></i> <span>Multilevel</span>
-      <span class="pull-right-container">
-      <i class="fa fa-angle-left pull-right"></i>
-      </span>
-      </a>
-      <ul class="treeview-menu">
-         <li><a href="#">Link in level 2</a></li>
-         <li><a href="#">Link in level 2</a></li>
-      </ul>
-   </li>
-
-</ul>
+    {% include 'block_menu_sidebar.html' %}
 {% endblock %}
 
