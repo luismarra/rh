@@ -1,0 +1,140 @@
+{% extends 'starter.html' %}
+{% load static %}
+{% load bootstrap %}
+<!--
+   Use as tags para invalidar parte dos códigos ou o block
+   -->
+{% block title %}
+ExpNEP | Funcionários
+{% endblock %}
+{% block header %}
+<section class="content-header">
+   <h1>
+      Gerenciar Funcionários
+      <small>
+      </small>
+   </h1>
+</section>
+{% endblock %}
+{% block main %}
+<section class="content">
+   <div class="row">
+      <!-- Form Cadastro -->
+      <form method="POST" role="form">
+         {% csrf_token %}
+         <div class="col-md-12">
+            <div class="box box-default">
+               <div class="box-header with-border">
+                  <i class="fa fa-user"></i>
+                  <h3 class="box-title">
+                     {% if object %}
+                     Editar funcionário
+                     {% endif %}
+                     {% if not object %}
+                     Novo funcionário
+                     {% endif %}
+                  </h3>
+                  <div class="box-tools pull-right">
+                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                     </button>
+                  </div>
+                  <!-- /.box-tools -->
+               </div>
+               <div class="box-body">
+                  <div class="box-body">
+                     <div class="row">
+                        <div class="col-md-6">
+                           {{ form.nome|bootstrap }}
+                        </div>
+                        <div class="col-md-6">
+                           {{ form.sobrenome|bootstrap }}
+                        </div>
+                        <div class="col-md-12">
+                           {{ form.funcao|bootstrap }}
+                        </div>
+                        <div class="col-md-12">
+                           {{ form.departamentos|bootstrap }}
+                        </div>
+                     </div>
+                     <!-- /.box-body -->
+                     <div class="box-footer">
+                        <div class="row">
+                           {% if object %}
+                           <a href="{% url 'delete_funcionario' funcionario.id %}" class="btn btn-flat btn-danger">Deletar</a>
+                           {% endif %}
+                           <div class="pull-right">
+                              {% if object %}
+                                 <a href="{% url 'create_documento' object.id %}" class="btn bg-purple btn-flat">
+                                    Adicionar documento
+                                 </a>
+                              {% endif %}
+                              <a href="{% url 'list_funcionario' %}" class="btn btn-flat btn-primary">Voltar</a>
+                              <button type="submit" class="btn btn-flat btn-success">Save</button>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+
+{% if object %}
+         <div class="col-md-12">
+           <div class="box box-default">
+                <div class="box-header with-border">
+                   <i class="fa fa-sticky-note"></i>
+                   <h3 class="box-title">
+                     Documentos
+                  </h3>
+                </div>
+                <!-- /.box-header -->
+                <div class="box-body no-padding">
+                  <ul class="users-list clearfix">
+                     {% for documento in object.documento_set.all %}
+                     <li>
+                      <img src="{% static 'AdminLTE/dist/img/download.svg' %}" alt="User Image">
+                      <a class="users-list-name" href="{{ documento.arquivo.url }}">{{ documento.descricao }}</a>
+                      <span class="users-list-date">{{ documento.id }}</span>
+                    </li>
+                     {% endfor %}
+                  </ul>
+                  <!-- /.users-list -->
+                </div>
+                <!-- /.box-body -->
+                <div class="box-footer text-center">
+                   <p>...</p>
+                </div>
+                <!-- /.box-footer -->
+              </div>
+         </div>
+{% endif %}
+      </form>
+   </div>
+</section>
+{% endblock %}
+{% block search_sidebar %}
+{% endblock %}
+{% block logo_sidebar %}
+{% include 'block_logo_sidebar.html' %}
+{% endblock %}
+{% block topside_menu_messages %}
+{% include 'block_topside_menu_messages.html' %}
+{% endblock %}
+{% block topside_menu_tasks %}
+{% include 'block_topside_menu_tasks.html' %}
+{% endblock %}
+{% block topside_menu_notifications %}
+{% include 'block_topside_menu_notifications.html' %}
+{% endblock %}
+{% block topside_useraccount_menu %}
+{% include 'block_topside_useraccount_menu.html' %}
+{% endblock %}
+{% block userpanel_sidebar %}
+{% include 'block_userpanel_sidebar.html' %}
+{% endblock %}
+{% block right_sidebar_custon %}
+{% include 'block_right_sidebar_custon.html' %}
+{% endblock %}
+{% block menu_sidebar %}
+{% include 'block_menu_sidebar.html' %}
+{% endblock %}

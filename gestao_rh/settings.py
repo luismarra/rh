@@ -43,8 +43,10 @@ INSTALLED_APPS = [
     'apps.departamentos',
     'apps.documentos',
     'apps.registro_horas_extras',
-    'apps.core'
+    'apps.core',
+    'bootstrapform'
 # Applications of 3rd
+
 ]
 
 MIDDLEWARE = [
@@ -128,11 +130,17 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
+    os.path.join(BASE_DIR, "staticfiles"),
 ]
+
+STATIC_ROOT = os.path.join(BASE_DIR, "static")
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 
 LOGIN_REDIRECT_URL = 'home'
 
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = 'login'
 
 

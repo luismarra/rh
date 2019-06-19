@@ -7,17 +7,34 @@
    <!--
    <li><a href="#"><i class="fa fa-users"></i> <span>QLP</span></a></li>
    -->
-
+   {% if 'cadastro' in request.path %}
    <li class="treeview active">
-      <a href="#"><i class="fa fa-users"></i> <span>Cadastro</span>
+   {% else %}
+   <li class="treeview">
+   {% endif %}
+      <a href="#"><i class="fa fa-th"></i> <span>Cadastro</span>
       <span class="pull-right-container">
       <i class="fa fa-angle-left pull-right"></i>
       </span>
       </a>
       <ul class="treeview-menu">
-         <li><a href="#"><i class="fa fa-user-plus"></i>Funcionário</a></li>
-         <li class="active"><a href="{% url 'create_empresa' %}"><i class="fa fa-tasks"></i>Empresa</a></li>
-         <li><a href="#"><i class="fa fa-file-text-o"></i>Link in level 3</a></li>
+
+         {% if 'funcionarios' in request.path %}
+         <li class="active">
+         {% else %}
+         <li>
+         {% endif %}
+         <a href="{% url 'list_funcionario' %}"><i class="fa fa-plus-square-o"></i>Funcionários</a>
+         </li>
+
+         {% if 'departamentos' in request.path %}
+         <li class="active">
+         {% else %}
+         <li>
+         {% endif %}
+         <a href="{% url 'list_departamento' %}"><i class="fa fa-plus-square-o"></i>Departamentos</a>
+         </li>
+
       </ul>
    </li>
 

@@ -1,0 +1,148 @@
+{% extends 'starter.html' %}
+{% load static %}
+{% load bootstrap %}
+<!--
+   Use as tags para invalidar parte dos códigos ou o block
+   -->
+{% block title %}
+ExpNEP | Funcionários
+{% endblock %}
+{% block header %}
+<section class="content-header">
+   <h1>
+      Gerenciar Funcionários
+      <small>
+      </small>
+   </h1>
+   <ol class="breadcrumb">
+      <a href="{% url 'create_funcionario' %}" class="btn btn-sm btn-primary">Novo</a>
+   </ol>
+</section>
+{% endblock %}
+
+{% block main %}
+<section class="content">
+   <div class="row">
+
+      <!-- Table funcionarios -->
+       {% if object_list %}
+      <div class="col-md-12">
+         <div class="box box-default">
+            <div class="box-header with-border">
+               <i class="fa fa-th-list"></i>
+               <h3 class="box-title">Lista de funcionários</h3>
+               <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+               </div>
+               <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+               <form method="GET" action="">
+               <div class="input-group input-group-sm">
+                <input type="text" name="name" autofocus="" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i> Pesquisar</button>
+                    </span>
+                 </div>
+               </form>
+
+                  <div class="box-body">
+                     <div class="table-responsive">
+
+                            <br>
+                        <table class="table table-hover  table-sm ba">
+                           <thead class="bg-secondary text-white">
+                              <tr style="background-color:rgba(0, 0, 0, 0.1);">
+                                 <th scope="col">#</th>
+                                 <th scope="col">Funcionário</th>
+                                 <th scope="col">Empresa</th>
+                                 <th scope="col">Usuário</th>
+                                 <th>Edit</th>
+                              </tr>
+                           </thead>
+                           <tbody id="myList">
+                              {% for funcionario in object_list %}
+                              <tr>
+                                 <td>{{ funcionario.id }}</td>
+                                 <td>{{ funcionario.nome }} {{ funcionario.sobrenome }}</td>
+                                 <td>{{ funcionario.empresa }}</td>
+                                 <td>{{ funcionario.user }}</td>
+                                 <td>
+                                    <a href="{% url 'update_funcionario' funcionario.id %}">Edit</a>
+                                    <span>|</span>
+                                    <a href="{% url 'delete_funcionario' funcionario.id %}">Delete</a>
+                                 </td>
+                              </tr>
+                              {% endfor %}
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+            </div>
+         </div>
+      </div>
+       {% endif %}
+
+      <!-- Menssagem -->
+       {% if not object_list %}
+      <div class="col-md-12">
+         <div class="box box-default">
+            <div class="box-header with-border">
+               <i class="fa fa-bullhorn"></i>
+               <h3 class="box-title">Atenção</h3>
+               <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+               </div>
+               <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+               <div class="callout callout-info">
+                  <h4>Lista de funcionários!</h4>
+                  <p>Não existem registros no banco de dados.</p>
+               </div>
+            </div>
+         </div>
+         <!-- /.box-body -->
+      </div>
+       {% endif %}
+      <!-- /.box -->
+   </div>
+
+
+
+</section>
+
+
+
+{% endblock %}
+{% block search_sidebar %}
+{% endblock %}
+{% block logo_sidebar %}
+{% include 'block_logo_sidebar.html' %}
+{% endblock %}
+{% block topside_menu_messages %}
+{% include 'block_topside_menu_messages.html' %}
+{% endblock %}
+{% block topside_menu_tasks %}
+{% include 'block_topside_menu_tasks.html' %}
+{% endblock %}
+{% block topside_menu_notifications %}
+{% include 'block_topside_menu_notifications.html' %}
+{% endblock %}
+{% block topside_useraccount_menu %}
+{% include 'block_topside_useraccount_menu.html' %}
+{% endblock %}
+{% block userpanel_sidebar %}
+{% include 'block_userpanel_sidebar.html' %}
+{% endblock %}
+{% block right_sidebar_custon %}
+{% include 'block_right_sidebar_custon.html' %}
+{% endblock %}
+{% block menu_sidebar %}
+{% include 'block_menu_sidebar.html' %}
+{% endblock %}

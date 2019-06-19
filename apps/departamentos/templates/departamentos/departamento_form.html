@@ -1,0 +1,104 @@
+{% extends 'starter.html' %}
+{% load static %}
+{% load bootstrap %}
+<!--
+   Use as tags para invalidar parte dos códigos ou o block
+   -->
+{% block title %}
+ExpNEP | Departamentos
+{% endblock %}
+{% block header %}
+<section class="content-header">
+   <h1>
+      Gerenciar Departamentos
+      <small>
+      </small>
+   </h1>
+
+</section>
+{% endblock %}
+
+{% block main %}
+<section class="content">
+   <div class="row">
+
+      <!-- Form Cadastro -->
+      <div class="col-md-12">
+         <div class="box box-default">
+            <div class="box-header with-border">
+               <i class="fa fa-user"></i>
+               <h3 class="box-title">
+                  {% if object %}
+                  Editar departamento
+                  {% endif %}
+                  {% if not object %}
+                  Novo departamento
+                  {% endif %}
+               </h3>
+               <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+               </div>
+               <!-- /.box-tools -->
+            </div>
+
+            <div class="box-body">
+               <form method="POST" role="form">
+                  {% csrf_token %}
+                  <div class="box-body">
+                     <div class="row">
+                        <div class="col-md-12">
+                        {{ form.nome|bootstrap }}
+                        </div>
+                         <div class="col-md-12">
+                        {{ form.descricao|bootstrap }}
+                        </div>
+                     </div>
+                     <!-- /.box-body -->
+                     <div class="box-footer">
+                        <div class="row">
+                        {% if object %}
+                        <a href="{% url 'delete_departamento' departamento.id %}" class="btn btn-flat btn-danger">Deletar</a>
+                        {% endif %}
+                        <div class="pull-right">
+                        <a href="{% url 'list_departamento' %}" class="btn btn-flat btn-primary">Voltar</a>
+                        <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                        </div>
+                     </div>
+
+                  </div>
+               </form>
+            </div>
+         </div>
+      </div>
+   </div>
+</section>
+
+{% endblock %}
+{% block search_sidebar %}
+{% endblock %}
+{% block logo_sidebar %}
+{% include 'block_logo_sidebar.html' %}
+{% endblock %}
+{% block topside_menu_messages %}
+{% include 'block_topside_menu_messages.html' %}
+{% endblock %}
+{% block topside_menu_tasks %}
+{% include 'block_topside_menu_tasks.html' %}
+{% endblock %}
+{% block topside_menu_notifications %}
+{% include 'block_topside_menu_notifications.html' %}
+{% endblock %}
+{% block topside_useraccount_menu %}
+{% include 'block_topside_useraccount_menu.html' %}
+{% endblock %}
+{% block userpanel_sidebar %}
+{% include 'block_userpanel_sidebar.html' %}
+{% endblock %}
+{% block right_sidebar_custon %}
+{% include 'block_right_sidebar_custon.html' %}
+{% endblock %}
+{% block menu_sidebar %}
+{% include 'block_menu_sidebar.html' %}
+{% endblock %}
