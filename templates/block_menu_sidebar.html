@@ -35,6 +35,14 @@
          <a href="{% url 'list_departamento' %}"><i class="fa fa-plus-square-o"></i>Departamentos</a>
          </li>
 
+         {% if 'registro_horas_extras' in request.path %}
+         <li class="active">
+         {% else %}
+         <li>
+         {% endif %}
+         <a href="{% url 'list_hora_extra' %}"><i class="fa fa-plus-square-o"></i>Horas Extras</a>
+         </li>
+
       </ul>
    </li>
 

@@ -41,7 +41,9 @@ ExpNEP | Funcionários
                      <div class="row">
                         <div class="col-md-6 col-sm-6 col-xs-12">
                            <div class="info-box bg-yellow">
-                              <span class="info-box-icon"><i class="fa fa-user"></i></span>
+                              <span class="info-box-icon">
+                                 <i class="fa fa-fw fa-user-times"></i>
+                              </span>
                               <div class="info-box-content">
                                  <span class="info-box-text">{{ object }}</span>
                                  <span class="info-box-number">{{ object.funcao }}</span>
@@ -53,6 +55,8 @@ ExpNEP | Funcionários
                            </div>
                            <!-- /.info-box -->
                         </div>
+
+
                      </div>
                      {% csrf_token %}
                      {{ form }}
@@ -60,7 +64,10 @@ ExpNEP | Funcionários
                   <br>
                   <br>
                   <div class="col-md-12">
-                     <button type="submit" class="btn btn-danger">Confirmar</button>
+                     <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-fw fa-trash-o"></i>
+                         Confirmar
+                     </button>
                   </div>
                </form>
             </div>

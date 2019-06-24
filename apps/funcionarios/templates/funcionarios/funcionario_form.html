@@ -1,6 +1,7 @@
 {% extends 'starter.html' %}
 {% load static %}
 {% load bootstrap %}
+
 <!--
    Use as tags para invalidar parte dos códigos ou o block
    -->
@@ -20,7 +21,7 @@ ExpNEP | Funcionários
 <section class="content">
    <div class="row">
       <!-- Form Cadastro -->
-      <form method="POST" role="form">
+      <form method="POST" role="form" enctype="multipart/form-data">
          {% csrf_token %}
          <div class="col-md-12">
             <div class="box box-default">
@@ -41,7 +42,6 @@ ExpNEP | Funcionários
                   <!-- /.box-tools -->
                </div>
                <div class="box-body">
-                  <div class="box-body">
                      <div class="row">
                         <div class="col-md-6">
                            {{ form.nome|bootstrap }}
@@ -55,59 +55,103 @@ ExpNEP | Funcionários
                         <div class="col-md-12">
                            {{ form.departamentos|bootstrap }}
                         </div>
+                        {% if object.image %}
+                        <div class="col-md-2">
+                              <img src="{{ funcionario.image.url }}" class="img-rounded" width="128" height="128">
+                        </div>
+                        {% endif %}
+                        {% if not object.image %}
+                        <div class="col-md-2">
+                              <img src="{% static 'AdminLTE/dist/img/default-50x50.gif' %}" class="img-rounded" width="128" height="128">
+                        </div>
+                        {% endif %}
+                        <div class="col-md-6">
+                           {{ form.image|bootstrap }}
+                        </div>
+                        <div class="col-md-6">
+                           {{ form.data_created|bootstrap }}
+                        </div>
                      </div>
                      <!-- /.box-body -->
                      <div class="box-footer">
                         <div class="row">
-                           {% if object %}
-                           <a href="{% url 'delete_funcionario' funcionario.id %}" class="btn btn-flat btn-danger">Deletar</a>
-                           {% endif %}
-                           <div class="pull-right">
+                           <div class="col-md-4">
                               {% if object %}
-                                 <a href="{% url 'create_documento' object.id %}" class="btn bg-purple btn-flat">
-                                    Adicionar documento
-                                 </a>
+                              <a href="{% url 'delete_funcionario' funcionario.id %}" class="btn btn-flat btn-danger">
+                              <i class="fa fa-fw fa-trash-o"></i>
+                              Deletar
+                              </a>
                               {% endif %}
-                              <a href="{% url 'list_funcionario' %}" class="btn btn-flat btn-primary">Voltar</a>
-                              <button type="submit" class="btn btn-flat btn-success">Save</button>
                            </div>
-                        </div>
+
+                            <div class="col-md-8">
+                              <div class="pull-right">
+                                 {% if object %}
+                                 <a href="{% url 'create_documento' object.id %}" class="btn bg-purple btn-flat">
+                                 <i class="fa fa-fw fa-paperclip"></i>
+                                 Adicionar documento
+                                 </a>
+                                 {% endif %}
+                                 <a href="{% url 'list_funcionario' %}" class="btn btn-flat btn-primary">
+                                 <i class="fa fa-fw fa-undo"></i>
+                                 Voltar
+                                 </a>
+                                 <button type="submit" class="btn btn-flat btn-success">
+                                 <i class="fa fa-fw fa-save"></i>
+                                 Save
+                                 </button>
+                              </div>
+                           </div>
+                           </div>
                      </div>
-                  </div>
                </div>
             </div>
          </div>
-
-{% if object %}
+         {% if object %}
          <div class="col-md-12">
-           <div class="box box-default">
-                <div class="box-header with-border">
-                   <i class="fa fa-sticky-note"></i>
-                   <h3 class="box-title">
+            <div class="box box-primary">
+               <div class="box-header with-border">
+                  <i class="fa fa-sticky-note"></i>
+                  <h3 class="box-title">
                      Documentos
                   </h3>
-                </div>
-                <!-- /.box-header -->
-                <div class="box-body no-padding">
-                  <ul class="users-list clearfix">
+               </div>
+               <!-- /.box-header -->
+               <br>
+               <div class="container-fluid">
+                  <div class="row display:felx;">
                      {% for documento in object.documento_set.all %}
-                     <li>
-                      <img src="{% static 'AdminLTE/dist/img/download.svg' %}" alt="User Image">
-                      <a class="users-list-name" href="{{ documento.arquivo.url }}">{{ documento.descricao }}</a>
-                      <span class="users-list-date">{{ documento.id }}</span>
-                    </li>
+                     <div class="col-md-4" >
+                        <!-- small box -->
+                        <div class="panel panel-default" >
+                           <div class="panel-body">
+                              <div class="thumbnail">
+                                 <img src="{{ documento.arquivo.url }}" class="img-responsive" alt="Nature" width="75" height="75">
+                              </div>
+                              <p class="text-center">
+                                 {{ documento.descricao }}
+                              </p>
+                           </div>
+                           <a href="{{ documento.arquivo.url }}" class="small-box-footer">
+                              <div class="panel-footer text-center">
+                                 Abrir
+                                 <i class="fa fa-arrow-circle-right"></i>
+                              </div>
+                           </a>
+                        </div>
+                     </div>
                      {% endfor %}
-                  </ul>
-                  <!-- /.users-list -->
-                </div>
-                <!-- /.box-body -->
-                <div class="box-footer text-center">
-                   <p>...</p>
-                </div>
-                <!-- /.box-footer -->
-              </div>
+                     <!-- ./col -->
+                  </div>
+               </div>
+               <!-- /.box-body -->
+               <div class="box-footer text-center">
+                  <p>...</p>
+               </div>
+               <!-- /.box-footer -->
+            </div>
          </div>
-{% endif %}
+         {% endif %}
       </form>
    </div>
 </section>

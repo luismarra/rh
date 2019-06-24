@@ -1,0 +1,102 @@
+{% extends 'starter.html' %}
+{% load static %}
+{% load bootstrap %}
+<!--
+   Use as tags para invalidar parte dos códigos ou o block
+   -->
+{% block title %}
+ExpNEP | Horas Extras
+{% endblock %}
+{% block header %}
+<section class="content-header">
+   <h1>
+      Gerenciar Horas Extras
+      <small>
+      </small>
+   </h1>
+   <ol class="breadcrumb">
+      <a href="{% url 'list_hora_extra' %}" class="btn btn-sm btn-primary">Voltar</a>
+   </ol>
+</section>
+{% endblock %}
+{% block main %}
+<section class="content">
+   <div class="row">
+      <!-- Menssagem -->
+      <div class="col-md-12">
+         <div class="box box-default">
+            <div class="box-header with-border">
+               <i class="fa fa-bullhorn"></i>
+               <h3 class="box-title">Atenção, tem certeza que deseja excluir o registro?</h3>
+               <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+               </div>
+               <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+               <form method="POST">
+                  <div class="col-md-12">
+                     <div class="row">
+                        <div class="col-md-6 col-sm-6 col-xs-12">
+                           <div class="info-box bg-yellow">
+                              <span class="info-box-icon"><i class="fa fa-briefcase"></i></span>
+                              <div class="info-box-content">
+                                 <span class="info-box-text">{{ object }}</span>
+                                 <span class="info-box-number">{{ object.motivo }}</span>
+                                 <span class="progress-description">
+                                 Obs.: {{ object.observacao }}
+                                 </span>
+                              </div>
+                              <!-- /.info-box-content -->
+                           </div>
+                           <!-- /.info-box -->
+                        </div>
+                     </div>
+                     {% csrf_token %}
+                     {{ form }}
+                  </div>
+                  <br>
+                  <br>
+                  <div class="col-md-12">
+                     <button type="submit" class="btn btn-danger">
+                        <i class="fa fa-fw fa-trash-o"></i>
+                         Confirmar
+                     </button>
+                  </div>
+               </form>
+            </div>
+         </div>
+         <!-- /.box-body -->
+      </div>
+      <!-- /.box -->
+   </div>
+</section>
+{% endblock %}
+{% block search_sidebar %}
+{% endblock %}
+{% block logo_sidebar %}
+{% include 'block_logo_sidebar.html' %}
+{% endblock %}
+{% block topside_menu_messages %}
+{% include 'block_topside_menu_messages.html' %}
+{% endblock %}
+{% block topside_menu_tasks %}
+{% include 'block_topside_menu_tasks.html' %}
+{% endblock %}
+{% block topside_menu_notifications %}
+{% include 'block_topside_menu_notifications.html' %}
+{% endblock %}
+{% block topside_useraccount_menu %}
+{% include 'block_topside_useraccount_menu.html' %}
+{% endblock %}
+{% block userpanel_sidebar %}
+{% include 'block_userpanel_sidebar.html' %}
+{% endblock %}
+{% block right_sidebar_custon %}
+{% include 'block_right_sidebar_custon.html' %}
+{% endblock %}
+{% block menu_sidebar %}
+{% include 'block_menu_sidebar.html' %}
+{% endblock %}

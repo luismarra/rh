@@ -44,10 +44,14 @@ INSTALLED_APPS = [
     'apps.documentos',
     'apps.registro_horas_extras',
     'apps.core',
+    'crispy_forms',
+    'bootstrap4',
     'bootstrapform'
 # Applications of 3rd
 
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -122,6 +126,8 @@ USE_I18N = True
 USE_L10N = True
 
 USE_TZ = True
+
+TIME_INPUT_FORMATS = ('%H:%M',)
 
 
 # Static files (CSS, JavaScript, Images)

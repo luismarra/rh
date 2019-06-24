@@ -3,7 +3,12 @@
 
 <div class="user-panel">
    <div class="pull-left image">
-      <img src="{% static 'AdminLTE/dist/img/user_lm2-160x160.jpg' %}" class="img-circle" alt="User Image">
+       {% if request.user.funcionario.image %}
+           <img src="{{ request.user.funcionario.image.url }}" class="img-circle" alt="User Image">
+       {% endif %}
+      {% if not request.user.funcionario.image %}
+           <img src="{% static 'AdminLTE/dist/img/avatar5.png' %}" class="img-circle" alt="User Image">
+       {% endif %}
    </div>
    <div class="pull-left info">
       <p>{{ request.user.funcionario.user }}</p>

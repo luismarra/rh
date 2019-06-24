@@ -5,7 +5,7 @@ from .models import Departamento
 
 class DepartamentosList(ListView):
 	model = Departamento
-	fields = ['nome']
+	fields = ['nome', 'descricao']
 
 	def get_queryset(self):
 		empresa_logada = self.request.user.funcionario.empresa

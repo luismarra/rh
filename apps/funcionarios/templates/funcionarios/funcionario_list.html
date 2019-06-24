@@ -25,7 +25,7 @@ ExpNEP | Funcionários
    <div class="row">
 
       <!-- Table funcionarios -->
-       {% if object_list %}
+       {% if not object_list %}
       <div class="col-md-12">
          <div class="box box-default">
             <div class="box-header with-border">
@@ -81,6 +81,62 @@ ExpNEP | Funcionários
                         </table>
                      </div>
                   </div>
+            </div>
+         </div>
+      </div>
+       {% endif %}
+
+            <!-- Table funcionarios -->
+       {% if object_list %}
+      <div class="col-md-12">
+         <div class="box box-default">
+            <div class="box-header with-border">
+               <i class="fa fa-th-list"></i>
+               <h3 class="box-title">Lista de funcionários</h3>
+               <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+               </div>
+               <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+
+               <form method="GET" action="">
+               <div class="input-group input-group-sm">
+                <input type="text" name="name" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                      <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i> Pesquisar</button>
+                    </span>
+                 </div>
+               </form>
+
+                <div class="row">
+                    <br>
+                    {% for funcionario in object_list %}
+                    <div class="col-lg-2 col-xs-3" align="center">
+                        <a href="{% url 'update_funcionario' funcionario.id %}">
+                        {% if funcionario.image %}
+                                <img src="{{ funcionario.image.url }}" title="{{ funcionario.nome }} {{ funcionario.sobrenome }}" class="img-rounded" width="78" height="78">
+                         {% endif %}
+                         {% if not funcionario.image %}
+                                <img src="{% static 'AdminLTE/dist/img/default-50x50.gif' %}" title="{{ funcionario.nome }} {{ funcionario.sobrenome }}" class="img-rounded" width="78" height="78">
+                         {% endif %}
+                        </a>
+                          <p class="text-center users-list-name">
+                          <strong>
+                              {{ funcionario.nome }} {{ funcionario.sobrenome }}
+                          </strong>
+                          <small>
+                              <span class="users-list-date">{{ funcionario.funcao }}</span>
+                              <span class="users-list-date">{{ funcionario.data_created|date:"d/M/Y" }}</span>
+                              <span class="users-list-date">{{ funcionario.data_modified|date:"d/M/Y" }}</span>
+                          </small>
+                            </p>
+                    </div>
+                    {% endfor %}
+                </div>
+
             </div>
          </div>
       </div>
