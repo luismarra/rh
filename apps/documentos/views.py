@@ -1,4 +1,5 @@
-from django.views.generic import CreateView
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, UpdateView, DeleteView
 from .models import Documento
 
 
@@ -14,3 +15,14 @@ class DocumentoCreate(CreateView):
             return self.form_valid(form)
         else:
             return self.form_invalid(form)
+
+
+class DocumentoEdit(UpdateView):
+    model = Documento
+    fields = '__all__'
+
+
+class DocumentoDelete(DeleteView):
+    model = Documento
+    fields = '__all__'
+    success_url = reverse_lazy('list_funcionario')

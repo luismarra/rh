@@ -23,9 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '%2bp95+sqac8mv-x0zgxa==fqzi6bf=@vhh44x+6(e69us%q9#'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['expnep.kinghost.net', 'http://127.0.0.1:8000', 'localhost']
 
 
 # Application definition
@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'apps.core',
     'crispy_forms',
     'bootstrap4',
+    'widget_tweaks',
     'bootstrapform'
 # Applications of 3rd
 

@@ -1,6 +1,7 @@
 {% extends 'starter.html' %}
 {% load static %}
 {% load bootstrap %}
+{% load widget_tweaks%}
 <!--
    Use as tags para invalidar parte dos códigos ou o block
    -->
@@ -26,7 +27,7 @@ ExpNEP | Horas Extras
       <div class="col-md-12">
          <div class="box box-default">
             <div class="box-header with-border">
-               <i class="fa fa-user"></i>
+               <i class="fa fa-clock-o"></i>
                <h3 class="box-title">
                   {% if object %}
                   Editar Horas Extras
@@ -41,13 +42,10 @@ ExpNEP | Horas Extras
                </div>
                <!-- /.box-tools -->
             </div>
-
             <div class="box-body">
                <form method="POST" role="form">
                   {% csrf_token %}
-                  <div class="box-body">
                      <div class="row">
-
                         <div class="col-md-6">
                            <div class="col-md-12">
                            {{ form.motivo|bootstrap }}
@@ -56,34 +54,40 @@ ExpNEP | Horas Extras
                            {{ form.observacao|bootstrap }}
                            </div>
                         </div>
-
                         <div class="col-md-6">
+
+                           {% if "extends" in request.path %}
+                           {% else %}
                            <div class="col-md-12">
-                           {{ form.funcionario|bootstrap }}
+                              {{ form.funcionario|bootstrap }}
+                           </div>
+                           {% endif %}
+
+                           <div class="col-md-12">
+                           {{ form.date_time_he|bootstrap }}
                            </div>
                            <div class="col-md-12">
-                           {{ form.time_he|bootstrap }}
-                           </div>
-                           <div class="col-md-12">
-                           {{ form.time_he1|bootstrap }}
+                           {{ form.time_he1|bootstrap}}
                            </div>
                         </div>
-
-
                      </div>
                      <!-- /.box-body -->
+                  <div class="box-body">
                      <div class="box-footer">
                         <div class="row">
                         {% if object %}
                         <a href="{% url 'delete_hora_extra' registrohoraextra.id %}" class="btn btn-flat btn-danger">Deletar</a>
                         {% endif %}
                         <div class="pull-right">
-                        <a href="{% url 'list_hora_extra' %}" class="btn btn-flat btn-primary">Voltar</a>
+                           {% if "extends" in request.path %}
+                           <a href="{% url 'list_funcionario' %}" class="btn btn-flat btn-primary">Voltar</a>
+                           {% else %}
+                              <a href="{% url 'list_hora_extra' %}" class="btn btn-flat btn-primary">Voltar</a>
+                           {% endif %}
                         <button type="submit" class="btn btn-success">Save</button>
                         </div>
                         </div>
                      </div>
-
                   </div>
                </form>
             </div>

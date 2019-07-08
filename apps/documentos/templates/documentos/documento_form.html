@@ -49,15 +49,36 @@ ExpNEP | Documentos
                      <div class="row">
                         <div class="col-md-12">
                         {{ form|bootstrap }}
-                        </div>
+                           </div>
+                           {% if object.arquivo %}
+                     <div class="col-md-2">
+                        <img src="{{ documento.arquivo.url }}" class="img-rounded" width="168" height="168">
+                     </div>
+                     {% endif %}
+                     {% if not object.arquivo %}
+                     <div class="col-md-2">
+                        <img src="{% static 'AdminLTE/dist/img/default-50x50.gif' %}" class="img-rounded" width="128" height="128">
+                     </div>
+                     {% endif %}
+
                      </div>
                      <!-- /.box-body -->
                      <div class="box-footer">
                         <div class="row">
+                        {% if object %}
+                        <a href="{% url 'delete_documento' documento.id %}" class="btn btn-flat btn-danger">
+                           <i class="fa fa-fw fa-trash-o"></i>
+                           Deletar
+                        </a>
+                        {% endif %}
                         <div class="pull-right">
+                        <a href="{% url 'list_funcionario' %}" class="btn btn-flat btn-primary">
+                           <i class="fa fa-fw fa-undo"></i>
+                           Voltar
+                        </a>
                         <button type="submit" class="btn btn-success">
-                           <i class="fa fa-fw fa-cloud-upload"></i>
-                            Adicionar
+                           <i class="fa fa-fw fa-save"></i>
+                           Save
                         </button>
                         </div>
                         </div>

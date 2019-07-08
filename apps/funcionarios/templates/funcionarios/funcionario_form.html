@@ -2,9 +2,6 @@
 {% load static %}
 {% load bootstrap %}
 
-<!--
-   Use as tags para invalidar parte dos códigos ou o block
-   -->
 {% block title %}
 ExpNEP | Funcionários
 {% endblock %}
@@ -42,72 +39,71 @@ ExpNEP | Funcionários
                   <!-- /.box-tools -->
                </div>
                <div class="box-body">
-                     <div class="row">
-                        <div class="col-md-6">
-                           {{ form.nome|bootstrap }}
-                        </div>
-                        <div class="col-md-6">
-                           {{ form.sobrenome|bootstrap }}
-                        </div>
-                        <div class="col-md-12">
-                           {{ form.funcao|bootstrap }}
-                        </div>
-                        <div class="col-md-12">
-                           {{ form.departamentos|bootstrap }}
-                        </div>
-                        {% if object.image %}
-                        <div class="col-md-2">
-                              <img src="{{ funcionario.image.url }}" class="img-rounded" width="128" height="128">
-                        </div>
-                        {% endif %}
-                        {% if not object.image %}
-                        <div class="col-md-2">
-                              <img src="{% static 'AdminLTE/dist/img/default-50x50.gif' %}" class="img-rounded" width="128" height="128">
-                        </div>
-                        {% endif %}
-                        <div class="col-md-6">
-                           {{ form.image|bootstrap }}
-                        </div>
-                        <div class="col-md-6">
-                           {{ form.data_created|bootstrap }}
-                        </div>
+                  <div class="row">
+                     <div class="col-md-6">
+                        {{ form.nome|bootstrap }}
                      </div>
-                     <!-- /.box-body -->
-                     <div class="box-footer">
-                        <div class="row">
-                           <div class="col-md-4">
+                     <div class="col-md-6">
+                        {{ form.sobrenome|bootstrap }}
+                     </div>
+                     <div class="col-md-12">
+                        {{ form.funcao|bootstrap }}
+                     </div>
+                     <div class="col-md-12">
+                        {{ form.departamentos|bootstrap }}
+                     </div>
+                     {% if object.image %}
+                     <div class="col-md-2">
+                        <img src="{{ funcionario.image.url }}" class="img-rounded" width="168" height="168">
+                     </div>
+                     {% endif %}
+                     {% if not object.image %}
+                     <div class="col-md-2">
+                        <img src="{% static 'AdminLTE/dist/img/default-50x50.gif' %}" class="img-rounded" width="128" height="128">
+                     </div>
+                     {% endif %}
+                     <div class="col-md-6">
+                        {{ form.image|bootstrap }}
+                     </div>
+                     <div class="col-md-6">
+                        {{ form.data_created|bootstrap }}
+                     </div>
+                  </div>
+                  <!-- /.box-body -->
+                  <div class="box-footer">
+                     <div class="row">
+                        <div class="col-md-4">
+                           {% if object %}
+                           <a href="{% url 'delete_funcionario' funcionario.id %}" title="Deletar" class="btn btn-flat btn-danger">
+                           <i class="fa fa-fw fa-trash-o"></i>
+                           </a>
+                           {% endif %}
+                        </div>
+                        <div class="col-md-8">
+                           <div class="pull-right">
                               {% if object %}
-                              <a href="{% url 'delete_funcionario' funcionario.id %}" class="btn btn-flat btn-danger">
-                              <i class="fa fa-fw fa-trash-o"></i>
-                              Deletar
+                              <a href="{% url 'create_hora_extra_extends' object.id %}" title="Adicionar HE" class="btn btn-default btn-flat">
+                              <i class="fa fa-fw fa-hourglass-o"></i>
+                              </a>
+                              <a href="{% url 'create_documento_func' object.id %}" title="Adicionar documento" class="btn btn-primary btn-flat">
+                              <i class="fa fa-fw fa-paperclip"></i>
                               </a>
                               {% endif %}
+                              <a href="{% url 'list_funcionario' %}" title="Voltar" class="btn btn-flat btn-info">
+                              <i class="fa fa-fw fa-undo"></i>
+                              </a>
+                              <button type="submit" title="Salvar" class="btn btn-flat btn-success">
+                              <i class="fa fa-fw fa-save"></i>
+                              </button>
                            </div>
-
-                            <div class="col-md-8">
-                              <div class="pull-right">
-                                 {% if object %}
-                                 <a href="{% url 'create_documento' object.id %}" class="btn bg-purple btn-flat">
-                                 <i class="fa fa-fw fa-paperclip"></i>
-                                 Adicionar documento
-                                 </a>
-                                 {% endif %}
-                                 <a href="{% url 'list_funcionario' %}" class="btn btn-flat btn-primary">
-                                 <i class="fa fa-fw fa-undo"></i>
-                                 Voltar
-                                 </a>
-                                 <button type="submit" class="btn btn-flat btn-success">
-                                 <i class="fa fa-fw fa-save"></i>
-                                 Save
-                                 </button>
-                              </div>
-                           </div>
-                           </div>
+                        </div>
                      </div>
+                  </div>
                </div>
             </div>
          </div>
-         {% if object %}
+      </form>
+         {% if object.documento_set.all %}
          <div class="col-md-12">
             <div class="box box-primary">
                <div class="box-header with-border">
@@ -118,27 +114,19 @@ ExpNEP | Funcionários
                </div>
                <!-- /.box-header -->
                <br>
+               <!-- /.if -->
                <div class="container-fluid">
                   <div class="row display:felx;">
                      {% for documento in object.documento_set.all %}
-                     <div class="col-md-4" >
-                        <!-- small box -->
-                        <div class="panel panel-default" >
-                           <div class="panel-body">
-                              <div class="thumbnail">
-                                 <img src="{{ documento.arquivo.url }}" class="img-responsive" alt="Nature" width="75" height="75">
-                              </div>
-                              <p class="text-center">
-                                 {{ documento.descricao }}
-                              </p>
-                           </div>
-                           <a href="{{ documento.arquivo.url }}" class="small-box-footer">
-                              <div class="panel-footer text-center">
-                                 Abrir
-                                 <i class="fa fa-arrow-circle-right"></i>
-                              </div>
-                           </a>
-                        </div>
+                     <div class="col-lg-2 col-xs-3" align="center">
+                        <a href="{% url 'update_documento' documento.id %}">
+                        <img src="{{ documento.arquivo.url }}" title="{{ documento.descricao }}" class="img-rounded" width="78" height="78">
+                        </a>
+                        <p class="text-center users-list-name">
+                           <strong>
+                           {{ documento.descricao }}
+                           </strong>
+                        </p>
                      </div>
                      {% endfor %}
                      <!-- ./col -->
@@ -152,7 +140,132 @@ ExpNEP | Funcionários
             </div>
          </div>
          {% endif %}
-      </form>
+         <!-- Menssagem -->
+         {% if not object.documento_set.all %}
+         <div class="col-md-12">
+            <div class="box box-default">
+               <div class="box-header with-border">
+                  <i class="fa fa-bullhorn"></i>
+                  <h3 class="box-title">Atenção</h3>
+                  <div class="box-tools pull-right">
+                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                     </button>
+                  </div>
+                  <!-- /.box-tools -->
+               </div>
+               <!-- /.box-header -->
+               <div class="box-body">
+                  <div class="callout callout-default">
+                     <h4>Lista de documentos!</h4>
+                     <p>Não existem registros no banco de dados.</p>
+                  </div>
+               </div>
+            </div>
+            <!-- /.box-body -->
+         </div>
+         {% endif %}
+
+      {% if object.registrohoraextra_set.all %}
+         <div class="col-md-12">
+            <div class="box box-default">
+               <div class="box-header with-border">
+                  <i class="fa fa-clock-o"></i>
+                  <h3 class="box-title">
+                     Documentos
+                  </h3>
+               </div>
+               <!-- /.box-header -->
+               <br>
+               <!-- /.if -->
+
+                     <div class="box-body">
+                     <div class="table-responsive">
+                        <table class="table table-hover table-sm">
+                           <thead class="bg-secondary text-white">
+                              <tr style="background-color:rgba(0, 0, 0, 0.1);">
+                                 <th scope="col">#</th>
+                                 <th scope="col">Motivo</th>
+                                 <th scope="col">Data</th>
+                                 <th scope="col">Duração</th>
+                                 <th scope="col">Progress</th>
+                                 <th>Edit</th>
+                              </tr>
+                           </thead>
+                           <tbody id="myList">
+                              {% for registrohoraextra in object.registrohoraextra_set.all %}
+                              <tr>
+                                 <td scope="row">{{ registrohoraextra.id }}</td>
+                                 <td scope="row">{{ registrohoraextra.motivo }}</td>
+                                 <td scope="row">{{ registrohoraextra.date_time_he|date:'d/m/Y H:i' }}</td>
+                                 <td scope="row">{{ registrohoraextra.time_he1_duration_HHmm }}</td>
+                                  <td width="300" scope="row">
+                                      <div class="progress progress active">
+                                         <div class="progress-bar progress-bar-info progress-bar-striped"
+                                             title="{{ registrohoraextra.time_he1_duration_HHmm }}"
+                                             role="progressbar"
+                                             aria-valuenow="20"
+                                             aria-valuemin="0"
+                                             aria-valuemax="100"
+                                             style="width: 30%">
+                                        </div>
+                                        </div>
+                                  </td>
+                                 <td scope="row">
+                                    <a href="{% url 'update_hora_extra' registrohoraextra.id %}">
+                                       <button type="" class="btn btn-flat btn-xs btn-info">
+                                          <i class="fa fa-pencil"></i>
+                                       </button>
+                                    </a>
+                                    <a href="{% url 'delete_hora_extra' registrohoraextra.id %}">
+                                       <button type="" class="btn btn-flat btn-xs btn-danger">
+                                          <i class="fa fa-fw fa-trash-o"></i>
+                                       </button>
+                                    </a>
+                                 </td>
+                              </tr>
+                              {% endfor %}
+                           </tbody>
+                        </table>
+                     </div>
+                  </div>
+
+                     <!-- ./col -->
+
+
+               <!-- /.box-body -->
+               <div class="box-footer text-center">
+                  <p>...</p>
+               </div>
+               <!-- /.box-footer -->
+            </div>
+         </div>
+         {% endif %}
+         <!-- Menssagem -->
+         {% if not object.registrohoraextra_set.all %}
+         <div class="col-md-12">
+            <div class="box box-danger">
+               <div class="box-header with-border">
+                  <i class="fa fa-bullhorn"></i>
+                  <h3 class="box-title">Atenção</h3>
+                  <div class="box-tools pull-right">
+                     <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                     </button>
+                  </div>
+                  <!-- /.box-tools -->
+               </div>
+               <!-- /.box-header -->
+               <div class="box-body">
+                  <div class="callout callout-default">
+                     <h4>Lista de horas extras!</h4>
+                     <p>Não existem registros no banco de dados.</p>
+                  </div>
+               </div>
+            </div>
+            <!-- /.box-body -->
+         </div>
+         {% endif %}
+
+
    </div>
 </section>
 {% endblock %}

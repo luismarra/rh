@@ -2,6 +2,8 @@ from django.contrib.auth.models import User
 from django.template.defaultfilters import lower
 from django.urls import reverse_lazy
 from django.views.generic import ListView, UpdateView, CreateView, DeleteView
+
+from apps.funcionarios.forms import DepartamentoForm
 from .models import Funcionario
 
 
@@ -34,4 +36,3 @@ class FuncionarioNovo(CreateView):
         funcionario.user = User.objects.create(username=lower(username))
         funcionario.save()
         return super(FuncionarioNovo, self).form_valid(form)
-

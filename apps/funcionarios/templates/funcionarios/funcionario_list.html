@@ -19,13 +19,11 @@ ExpNEP | Funcionários
    </ol>
 </section>
 {% endblock %}
-
 {% block main %}
 <section class="content">
    <div class="row">
-
       <!-- Table funcionarios -->
-       {% if not object_list %}
+      {% if not object_list %}
       <div class="col-md-12">
          <div class="box box-default">
             <div class="box-header with-border">
@@ -39,111 +37,187 @@ ExpNEP | Funcionários
             </div>
             <!-- /.box-header -->
             <div class="box-body">
-
                <form method="GET" action="">
-               <div class="input-group input-group-sm">
-                <input type="text" name="name" autofocus="" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i> Pesquisar</button>
-                    </span>
-                 </div>
+                  <div class="input-group input-group-sm">
+                     <input type="text" name="name" autofocus="" class="form-control" placeholder="Search...">
+                     <span class="input-group-btn">
+                     <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i> Pesquisar</button>
+                     </span>
+                  </div>
                </form>
-
-                  <div class="box-body">
-                     <div class="table-responsive">
-
-                            <br>
-                        <table class="table table-hover  table-sm ba">
-                           <thead class="bg-secondary text-white">
-                              <tr style="background-color:rgba(0, 0, 0, 0.1);">
-                                 <th scope="col">#</th>
-                                 <th scope="col">Funcionário</th>
-                                 <th scope="col">Empresa</th>
-                                 <th scope="col">Usuário</th>
-                                 <th>Edit</th>
-                              </tr>
-                           </thead>
-                           <tbody id="myList">
-                              {% for funcionario in object_list %}
-                              <tr>
-                                 <td>{{ funcionario.id }}</td>
-                                 <td>{{ funcionario.nome }} {{ funcionario.sobrenome }}</td>
-                                 <td>{{ funcionario.empresa }}</td>
-                                 <td>{{ funcionario.user }}</td>
-                                 <td>
-                                    <a href="{% url 'update_funcionario' funcionario.id %}">Edit</a>
-                                    <span>|</span>
-                                    <a href="{% url 'delete_funcionario' funcionario.id %}">Delete</a>
-                                 </td>
-                              </tr>
-                              {% endfor %}
-                           </tbody>
-                        </table>
+               <div class="box-body">
+                  <div class="table-responsive">
+                     <br>
+                     <table class="table table-hover  table-sm ba">
+                        <thead class="bg-secondary text-white">
+                           <tr style="background-color:rgba(0, 0, 0, 0.1);">
+                              <th scope="col">#</th>
+                              <th scope="col">Funcionário</th>
+                              <th scope="col">Empresa</th>
+                              <th scope="col">Usuário</th>
+                              <th>Edit</th>
+                           </tr>
+                        </thead>
+                        <tbody id="myList">
+                           {% for funcionario in object_list %}
+                           <tr>
+                              <td>{{ funcionario.id }}</td>
+                              <td>{{ funcionario.nome }} {{ funcionario.sobrenome }}</td>
+                              <td>{{ funcionario.empresa }}</td>
+                              <td>{{ funcionario.user }}</td>
+                              <td>
+                                 <a href="{% url 'update_funcionario' funcionario.id %}">Edit</a>
+                                 <span>|</span>
+                                 <a href="{% url 'delete_funcionario' funcionario.id %}">Delete</a>
+                              </td>
+                           </tr>
+                           {% endfor %}
+                        </tbody>
+                     </table>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {% endif %}
+      <!-- Table funcionarios -->
+      {% if object_list %}
+      <div class="col-md-12">
+         <div class="box box-default">
+            <div class="box-header with-border">
+               <i class="fa fa-th-list"></i>
+               <h3 class="box-title">Lista de funcionários</h3>
+               <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+               </div>
+               <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+               <form method="GET" action="">
+                  <div class="input-group input-group-sm">
+                     <input type="text" name="name" class="form-control" placeholder="Search...">
+                     <span class="input-group-btn">
+                     <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i> Pesquisar</button>
+                     </span>
+                  </div>
+               </form>
+               <div class="row">
+                  <br>
+                  {% for funcionario in object_list %}
+                  <div class="col-lg-2 col-xs-3" align="center">
+                     <a href="{% url 'update_funcionario' funcionario.id %}">
+                     {% if funcionario.image %}
+                     <img src="{{ funcionario.image.url }}" title="{{ funcionario.nome }} {{ funcionario.sobrenome }}" class="img-rounded" width="78" height="78">
+                     {% endif %}
+                     {% if not funcionario.image %}
+                     <img src="{% static 'AdminLTE/dist/img/default-50x50.gif' %}" title="{{ funcionario.nome }} {{ funcionario.sobrenome }}" class="img-rounded" width="78" height="78">
+                     {% endif %}
+                     </a>
+                     <p class="text-center users-list-name">
+                        <strong>
+                        {{ funcionario.nome }} {{ funcionario.sobrenome }}
+                        </strong>
+                        <small>
+                        <span class="users-list-date">{{ funcionario.funcao }}</span>
+                        <span class="users-list-date">{{ funcionario.data_created|date:"d/M/Y" }}</span>
+                        <span class="users-list-date">{{ funcionario.data_modified|date:"d/M/Y" }}</span>
+                        </small>
+                     </p>
+                  </div>
+                  {% endfor %}
+               </div>
+            </div>
+         </div>
+      </div>
+      {% endif %}
+      {% if not object_list %}
+      <div class="col-md-12">
+         <div class="box box-default">
+            <div class="box-header with-border">
+               <i class="fa fa-th-list"></i>
+               <h3 class="box-title">Lista de funcionários</h3>
+               <div class="box-tools pull-right">
+                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
+                  </button>
+               </div>
+               <!-- /.box-tools -->
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body">
+               <ul class="nav nav-tabs">
+                  <!-- /class="nav nav-tabs nav-pills" -->
+                  <li class="active"><a data-toggle="tab" href="#home">
+                     Home
+                     </a>
+                  </li>
+                  {% for funcionario in object_list %}
+                  <li><a title="{{ funcionario }}" data-toggle="tab" href="#{{ funcionario.id }}">
+                     {{ funcionario.id }}
+                     </a>
+                  </li>
+                  {% endfor %}
+               </ul>
+               <div class="tab-content">
+                  <div id="home" class="tab-pane fade in active">
+                     <div class="box-body">
+                        <form method="GET" action="">
+                           <div class="input-group input-group-sm">
+                              <input type="text" name="name" class="form-control" placeholder="Search...">
+                              <span class="input-group-btn">
+                              <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i> Pesquisar</button>
+                              </span>
+                           </div>
+                        </form>
+                        <div class="row">
+                           <br>
+                           {% for funcionario in object_list %}
+                           <div class="col-lg-2 col-xs-3" align="center">
+                              <a href="{% url 'update_funcionario' funcionario.id %}">
+                              {% if funcionario.image %}
+                              <img src="{{ funcionario.image.url }}" title="{{ funcionario.nome }} {{ funcionario.sobrenome }}" class="img-rounded" width="78" height="78">
+                              {% endif %}
+                              {% if not funcionario.image %}
+                              <img src="{% static 'AdminLTE/dist/img/default-50x50.gif' %}" title="{{ funcionario.nome }} {{ funcionario.sobrenome }}" class="img-rounded" width="78" height="78">
+                              {% endif %}
+                              </a>
+                              <p class="text-center users-list-name">
+                                 <strong>
+                                 {{ funcionario.nome }} {{ funcionario.sobrenome }}
+                                 </strong>
+                                 <small>
+                                 <span class="users-list-date">{{ funcionario.funcao }}</span>
+                                 <span class="users-list-date">{{ funcionario.data_created|date:"d/M/Y" }}</span>
+                                 <span class="users-list-date">{{ funcionario.data_modified|date:"d/M/Y" }}</span>
+                                 </small>
+                              </p>
+                           </div>
+                           {% endfor %}
+                        </div>
                      </div>
                   </div>
-            </div>
-         </div>
-      </div>
-       {% endif %}
-
-            <!-- Table funcionarios -->
-       {% if object_list %}
-      <div class="col-md-12">
-         <div class="box box-default">
-            <div class="box-header with-border">
-               <i class="fa fa-th-list"></i>
-               <h3 class="box-title">Lista de funcionários</h3>
-               <div class="box-tools pull-right">
-                  <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
-                  </button>
+                  {% for funcionario in object_list %}
+                  <div id="{{ funcionario.id }}" class="tab-pane fade">
+                     <h3>{{ funcionario }}</h3>
+                     <a href="{% url 'update_funcionario' funcionario.id %}">
+                     {% if funcionario.image %}
+                     <img src="{{ funcionario.image.url }}" title="{{ funcionario.nome }} {{ funcionario.sobrenome }}" class="img-rounded" width="358" height="358">
+                     {% endif %}
+                     {% if not funcionario.image %}
+                     <img src="{% static 'AdminLTE/dist/img/default-50x50.gif' %}" title="{{ funcionario.nome }} {{ funcionario.sobrenome }}" class="img-rounded" width="358" height="358">
+                     {% endif %}
+                     </a>
+                     <p>Some content in {{ funcionario.id }}.</p>
+                  </div>
+                  {% endfor %}
                </div>
-               <!-- /.box-tools -->
-            </div>
-            <!-- /.box-header -->
-            <div class="box-body">
-
-               <form method="GET" action="">
-               <div class="input-group input-group-sm">
-                <input type="text" name="name" class="form-control" placeholder="Search...">
-                    <span class="input-group-btn">
-                      <button type="submit" class="btn btn-primary btn-flat"><i class="fa fa-search"></i> Pesquisar</button>
-                    </span>
-                 </div>
-               </form>
-
-                <div class="row">
-                    <br>
-                    {% for funcionario in object_list %}
-                    <div class="col-lg-2 col-xs-3" align="center">
-                        <a href="{% url 'update_funcionario' funcionario.id %}">
-                        {% if funcionario.image %}
-                                <img src="{{ funcionario.image.url }}" title="{{ funcionario.nome }} {{ funcionario.sobrenome }}" class="img-rounded" width="78" height="78">
-                         {% endif %}
-                         {% if not funcionario.image %}
-                                <img src="{% static 'AdminLTE/dist/img/default-50x50.gif' %}" title="{{ funcionario.nome }} {{ funcionario.sobrenome }}" class="img-rounded" width="78" height="78">
-                         {% endif %}
-                        </a>
-                          <p class="text-center users-list-name">
-                          <strong>
-                              {{ funcionario.nome }} {{ funcionario.sobrenome }}
-                          </strong>
-                          <small>
-                              <span class="users-list-date">{{ funcionario.funcao }}</span>
-                              <span class="users-list-date">{{ funcionario.data_created|date:"d/M/Y" }}</span>
-                              <span class="users-list-date">{{ funcionario.data_modified|date:"d/M/Y" }}</span>
-                          </small>
-                            </p>
-                    </div>
-                    {% endfor %}
-                </div>
-
             </div>
          </div>
       </div>
-       {% endif %}
-
+      {% endif %}
       <!-- Menssagem -->
-       {% if not object_list %}
+      {% if not object_list %}
       <div class="col-md-12">
          <div class="box box-default">
             <div class="box-header with-border">
@@ -165,16 +239,10 @@ ExpNEP | Funcionários
          </div>
          <!-- /.box-body -->
       </div>
-       {% endif %}
+      {% endif %}
       <!-- /.box -->
    </div>
-
-
-
 </section>
-
-
-
 {% endblock %}
 {% block search_sidebar %}
 {% endblock %}

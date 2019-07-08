@@ -1,31 +1,62 @@
+from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import RegistroHoraExtra
+from .forms import RegistroHoraExtraForm
 
 
 
 class HoraExtraList(ListView):
     model = RegistroHoraExtra
-    fields = ['motivo', 'observacao', 'funcionario', 'time_he', 'time_he1']
+    fields = ['motivo', 'observacao',
+              'funcionario', 'date_time_he', 'time_he1']
+
+    def get_queryset(self):
+        empresa_logada = self.request.user.funcionario.empresa
+        return RegistroHoraExtra.objects.filter(
+            funcionario__empresa=empresa_logada)
 
 
 class HoraExtraNovo(CreateView):
     model = RegistroHoraExtra
-    fields = ['motivo', 'observacao', 'funcionario', 'time_he', 'time_he1']
+    form_class = RegistroHoraExtraForm
 
-    def form_valid(self, form):
-        registrohoraextra = form.save(commit=False)
-        registrohoraextra.empresa = self.request.user.funcionario.empresa
-        registrohoraextra.save()
-        return super(HoraExtraNovo, self).form_valid(form)
+    def get_form_kwargs(self):
+        kwargs = super(HoraExtraNovo, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+class HoraExtraNovoExtend(CreateView):
+    model = RegistroHoraExtra
+    fields = [
+        'motivo',
+        'observacao',
+        'date_time_he',
+        'time_he1']
+
+    def post(self, request, *args, **kwargs):
+        form = self.get_form()
+        form.instance.funcionario_id = self.kwargs['funcionario_id']
+
+        if form.is_valid():
+            return self.form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 class HoraExtraEdit(UpdateView):
     model = RegistroHoraExtra
-    fields = ['motivo', 'observacao', 'funcionario', 'time_he', 'time_he1']
+    form_class = RegistroHoraExtraForm
+
+    def get_form_kwargs(self):
+        kwargs = super(HoraExtraEdit, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
 
 
 class HoraExtraDelete(DeleteView):
     model = RegistroHoraExtra
     success_url = reverse_lazy('list_hora_extra')
+
 

@@ -1,16 +1,17 @@
 {% extends 'starter.html' %}
 {% load static %}
 {% load bootstrap %}
+{% load widget_tweaks%}
 <!--
    Use as tags para invalidar parte dos códigos ou o block
    -->
 {% block title %}
-ExpNEP | Departamentos
+ExpNEP | Horas Extras
 {% endblock %}
 {% block header %}
 <section class="content-header">
    <h1>
-      Gerenciar Departamentos
+      Gerenciar Horas Extras
       <small>
       </small>
    </h1>
@@ -26,13 +27,13 @@ ExpNEP | Departamentos
       <div class="col-md-12">
          <div class="box box-default">
             <div class="box-header with-border">
-               <i class="fa fa-desktop"></i>
+               <i class="fa fa-clock-o"></i>
                <h3 class="box-title">
                   {% if object %}
-                  Editar departamento
+                  Editar Horas Extras
                   {% endif %}
                   {% if not object %}
-                  Novo departamento
+                  Nova Horas Extras
                   {% endif %}
                </h3>
                <div class="box-tools pull-right">
@@ -41,32 +42,45 @@ ExpNEP | Departamentos
                </div>
                <!-- /.box-tools -->
             </div>
-
             <div class="box-body">
                <form method="POST" role="form">
                   {% csrf_token %}
-                  <div class="box-body">
                      <div class="row">
-                        <div class="col-md-12">
-                        {{ form.nome|bootstrap }}
+                        <div class="col-md-6">
+                           <div class="col-md-12">
+                           {{ form.motivo|bootstrap }}
+                           </div>
+                           <div class="col-md-12">
+                           {{ form.observacao|bootstrap }}
+                           </div>
                         </div>
-                         <div class="col-md-12">
-                        {{ form.descricao|bootstrap }}
+                        <div class="col-md-6">
+                           {% if object %}
+                           <div class="col-md-12">
+                           {{ form.funcionario|bootstrap }}
+                           </div>
+                           {% endif %}
+                           <div class="col-md-12">
+                           {{ form.date_time_he|bootstrap }}
+                           </div>
+                           <div class="col-md-12">
+                           {{ form.time_he1|bootstrap}}
+                           </div>
                         </div>
                      </div>
                      <!-- /.box-body -->
+                  <div class="box-body">
                      <div class="box-footer">
                         <div class="row">
                         {% if object %}
-                        <a href="{% url 'delete_departamento' departamento.id %}" class="btn btn-flat btn-danger">Deletar</a>
+                        <a href="{% url 'delete_hora_extra' registrohoraextra.id %}" class="btn btn-flat btn-danger">Deletar</a>
                         {% endif %}
                         <div class="pull-right">
-                        <a href="{% url 'list_departamento' %}" class="btn btn-flat btn-primary">Voltar</a>
+                        <a href="{% url 'list_hora_extra' %}" class="btn btn-flat btn-primary">Voltar</a>
                         <button type="submit" class="btn btn-success">Save</button>
                         </div>
                         </div>
                      </div>
-
                   </div>
                </form>
             </div>
