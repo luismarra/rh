@@ -1,0 +1,1 @@
+web: gunicorn gestaorh.wsgi --log-file -

@@ -43,7 +43,7 @@ ExpNEP | Departamentos
             </div>
 
             <div class="box-body">
-               <form method="POST" role="form">
+               <form method="POST" role="form" autocomplete="off">
                   {% csrf_token %}
                   <div class="box-body">
                      <div class="row">
@@ -58,11 +58,17 @@ ExpNEP | Departamentos
                      <div class="box-footer">
                         <div class="row">
                         {% if object %}
-                        <a href="{% url 'delete_departamento' departamento.id %}" class="btn btn-flat btn-danger">Deletar</a>
+                        <a href="{% url 'delete_departamento' departamento.id %}" class="btn btn-flat btn-danger">
+                           <i class="fa fa-fw fa-trash-o"></i>
+                        </a>
                         {% endif %}
                         <div class="pull-right">
-                        <a href="{% url 'list_departamento' %}" class="btn btn-flat btn-primary">Voltar</a>
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <a href="{% url 'list_departamento' %}" class="btn btn-flat btn-primary">
+                           <i class="fa fa-fw fa-undo"></i>
+                        </a>
+                        <button type="submit" class="btn btn-success">
+                           <i class="fa fa-fw fa-save"></i>
+                        </button>
                         </div>
                         </div>
                      </div>

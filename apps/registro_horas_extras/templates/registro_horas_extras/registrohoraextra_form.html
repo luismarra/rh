@@ -43,7 +43,7 @@ ExpNEP | Horas Extras
                <!-- /.box-tools -->
             </div>
             <div class="box-body">
-               <form method="POST" role="form">
+               <form method="POST" role="form" autocomplete="off">
                   {% csrf_token %}
                      <div class="row">
                         <div class="col-md-6">
@@ -76,15 +76,23 @@ ExpNEP | Horas Extras
                      <div class="box-footer">
                         <div class="row">
                         {% if object %}
-                        <a href="{% url 'delete_hora_extra' registrohoraextra.id %}" class="btn btn-flat btn-danger">Deletar</a>
+                        <a href="{% url 'delete_hora_extra' registrohoraextra.id %}" class="btn btn-flat btn-danger">
+                           <i class="fa fa-fw fa-trash-o"></i>
+                        </a>
                         {% endif %}
                         <div class="pull-right">
                            {% if "extends" in request.path %}
-                           <a href="{% url 'list_funcionario' %}" class="btn btn-flat btn-primary">Voltar</a>
+                           <a href="{% url 'list_funcionario' %}" class="btn btn-flat btn-primary">
+                              <i class="fa fa-fw fa-undo"></i>
+                           </a>
                            {% else %}
-                              <a href="{% url 'list_hora_extra' %}" class="btn btn-flat btn-primary">Voltar</a>
+                              <a href="{% url 'list_hora_extra' %}" class="btn btn-flat btn-primary">
+                                 <i class="fa fa-fw fa-undo"></i>
+                              </a>
                            {% endif %}
-                        <button type="submit" class="btn btn-success">Save</button>
+                        <button type="submit" class="btn btn-success">
+                           <i class="fa fa-fw fa-save"></i>
+                        </button>
                         </div>
                         </div>
                      </div>
