@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from django.urls import reverse_lazy
+from django.urls import reverse_lazy, reverse
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView
 from .models import RegistroHoraExtra
 from .forms import RegistroHoraExtraForm
@@ -10,6 +10,7 @@ class HoraExtraList(ListView):
     model = RegistroHoraExtra
     fields = ['motivo', 'observacao',
               'funcionario', 'date_time_he', 'time_he1']
+    paginate_by = 100
 
     def get_queryset(self):
         empresa_logada = self.request.user.funcionario.empresa
@@ -20,6 +21,7 @@ class HoraExtraList(ListView):
 class HoraExtraNovo(CreateView):
     model = RegistroHoraExtra
     form_class = RegistroHoraExtraForm
+    success_url = reverse_lazy('list_hora_extra')
 
     def get_form_kwargs(self):
         kwargs = super(HoraExtraNovo, self).get_form_kwargs()
@@ -34,6 +36,9 @@ class HoraExtraNovoExtend(CreateView):
         'observacao',
         'date_time_he',
         'time_he1']
+
+    def get_absolute_url(self):
+        return reverse_lazy('update_funcionario', args=[self.funcionario.id])
 
     def post(self, request, *args, **kwargs):
         form = self.get_form()
@@ -51,6 +56,17 @@ class HoraExtraEdit(UpdateView):
 
     def get_form_kwargs(self):
         kwargs = super(HoraExtraEdit, self).get_form_kwargs()
+        kwargs.update({'user': self.request.user})
+        return kwargs
+
+
+class HoraExtraEditList(UpdateView):
+    model = RegistroHoraExtra
+    form_class = RegistroHoraExtraForm
+    success_url = reverse_lazy('list_hora_extra')
+
+    def get_form_kwargs(self):
+        kwargs = super(HoraExtraEditList, self).get_form_kwargs()
         kwargs.update({'user': self.request.user})
         return kwargs
 

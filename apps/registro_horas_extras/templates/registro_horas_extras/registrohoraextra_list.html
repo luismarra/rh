@@ -14,9 +14,6 @@ ExpNEP | Horas Extras
       <small>
       </small>
    </h1>
-   <ol class="breadcrumb">
-      <a href="{% url 'create_hora_extra' %}" class="btn btn-sm btn-primary">Novo</a>
-   </ol>
 </section>
 {% endblock %}
 
@@ -25,12 +22,52 @@ ExpNEP | Horas Extras
    <div class="row">
 
       <!-- Table departmentos -->
+
        {% if object_list %}
+
+      <div class="col-md-4">
+         <div class="info-box bg-aqua">
+           <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Total Horas Extras</span>
+              <span class="info-box-number">{{ object_list.total_horas_extras }}</span>
+               <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-4">
+         <div class="info-box bg-aqua">
+           <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Média Horas Extras</span>
+              <span class="info-box-number">{{ object_list.media_horas_extras }}</span>
+               <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-4">
+         <div class="info-box bg-aqua">
+           <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Registro Horas Extras</span>
+              <span class="info-box-number">{{ object_list.qtd_horas_extras }}</span>
+               <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+         </div>
+      </div>
+
       <div class="col-md-12">
          <div class="box box-default">
             <div class="box-header with-border">
                <i class="fa fa-th-list"></i>
-               <h3 class="box-title">Lista de horas extras</h3>
+               <h3 class="box-title">Lista de horas extras | </h3>
+               <a href="{% url 'create_hora_extra' %}">Novo</a>
                <div class="box-tools pull-right">
                   <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i>
                   </button>
@@ -48,10 +85,8 @@ ExpNEP | Horas Extras
                     </span>
                  </div>
                </form>
-
-                  <div class="box-body">
-                     <div class="table-responsive">
-
+         </div>
+                     <div class="table-responsive ">
                             <br>
                         <table class="table table-hover table-sm">
                            <thead class="bg-secondary text-white">
@@ -86,7 +121,7 @@ ExpNEP | Horas Extras
                                         </div>
                                   </td>
                                  <td scope="row">
-                                    <a href="{% url 'update_hora_extra' registrohoraextra.id %}">
+                                    <a href="{% url 'update_hora_extra_extends' registrohoraextra.id %}">
                                        <button type="" class="btn btn-flat btn-xs btn-info">
                                           <i class="fa fa-pencil"></i>
                                        </button>
@@ -101,10 +136,22 @@ ExpNEP | Horas Extras
                               {% endfor %}
                            </tbody>
                         </table>
-                     </div>
-                  </div>
+
+                         <div class="col-sm-12">
+                           <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+                              <ul class="pagination">
+                                 <li class="paginate_button previous disabled" id="example1_previous"><a href="#">Anterior</a></li>
+                                 <li class="paginate_button active"><a href="#">1</a></li>
+                                 <li class="paginate_button "><a href="#">2</a></li>
+                                 <li class="paginate_button "><a href="#">3</a></li>
+                                 <li class="paginate_button "><a href="#">4</a></li>
+                                 <li class="paginate_button "><a href="#">5</a></li>
+                                 <li class="paginate_button "><a href="#">6</a></li>
+                                 <li class="paginate_button next" id="example1_next"><a href="#">Próximo</a></li>
+                              </ul>
+                           </div>
+                        </div>
             </div>
-         </div>
       </div>
        {% endif %}
 

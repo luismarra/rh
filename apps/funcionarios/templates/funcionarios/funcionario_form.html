@@ -166,19 +166,54 @@ ExpNEP | Funcionários
          {% endif %}
 
       {% if object.registrohoraextra_set.all %}
+      <div class="col-md-4">
+         <div class="info-box bg-aqua">
+           <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Total Horas Extras</span>
+              <span class="info-box-number">{{ object.total_horas_extras }}</span>
+               <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-4">
+         <div class="info-box bg-aqua">
+           <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Média Horas Extras</span>
+              <span class="info-box-number">{{ object.media_horas_extras }}</span>
+               <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+         </div>
+      </div>
+      <div class="col-md-4">
+         <div class="info-box bg-aqua">
+           <span class="info-box-icon"><i class="fa fa-clock-o"></i></span>
+            <div class="info-box-content">
+              <span class="info-box-text">Registro Horas Extras</span>
+              <span class="info-box-number">{{ object.qtd_horas_extras }}</span>
+               <div class="progress">
+                <div class="progress-bar" style="width: 100%"></div>
+              </div>
+            </div>
+         </div>
+      </div>
          <div class="col-md-12">
             <div class="box box-default">
                <div class="box-header with-border">
                   <i class="fa fa-clock-o"></i>
                   <h3 class="box-title">
-                     Documentos
+                     Horas Extras
                   </h3>
                </div>
                <!-- /.box-header -->
                <br>
                <!-- /.if -->
 
-                     <div class="box-body">
                      <div class="table-responsive">
                         <table class="table table-hover table-sm">
                            <thead class="bg-secondary text-white">
@@ -227,7 +262,6 @@ ExpNEP | Funcionários
                            </tbody>
                         </table>
                      </div>
-                  </div>
 
                      <!-- ./col -->
 

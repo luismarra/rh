@@ -81,12 +81,12 @@ ExpNEP | Horas Extras
                         </a>
                         {% endif %}
                         <div class="pull-right">
-                           {% if "extends" in request.path %}
-                           <a href="{% url 'list_funcionario' %}" class="btn btn-flat btn-primary">
+                           {% if "update/extends" in request.path %}
+                           <a href="{% url 'list_hora_extra' %}" class="btn btn-flat btn-primary">
                               <i class="fa fa-fw fa-undo"></i>
                            </a>
                            {% else %}
-                              <a href="{% url 'list_hora_extra' %}" class="btn btn-flat btn-primary">
+                              <a href="{% url 'list_funcionario' %}" class="btn btn-flat btn-primary">
                                  <i class="fa fa-fw fa-undo"></i>
                               </a>
                            {% endif %}
