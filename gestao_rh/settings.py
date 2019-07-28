@@ -28,7 +28,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 # SECURITY WARNING: don't run with debug turned on in production!
 
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', 'gestaorh.herokuapp.com']
+ALLOWED_HOSTS = ['167.71.177.14', '127.0.0.1', 'localhost', 'gestaorh.herokuapp.com']
 
 
 # Application definition
