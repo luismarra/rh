@@ -11,7 +11,7 @@ django-widget-tweaks==1.4.5
 gunicorn==19.9.0
 idna==2.8
 jet-django==0.7.0
-Pillow==6.0.0
+Pillow==9.0.1
 psycopg2-binary==2.8.3
 public==2019.4.13
 python-decouple==3.1
